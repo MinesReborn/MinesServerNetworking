@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net481;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <LangVersion>preview</LangVersion>
+	  <BaseIntermediateOutputPath>obj~\</BaseIntermediateOutputPath>
+	  <OutputPath>bin~\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MinesServer.Networking\MinesServer.Networking.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="obj\**" />
+		<EmbeddedResource Remove="obj\**" />
+		<None Remove="**/*.meta" />
+		<None Remove="obj\**" />
+	</ItemGroup>
+</Project>

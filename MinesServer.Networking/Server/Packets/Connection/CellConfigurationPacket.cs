@@ -1,0 +1,16 @@
+﻿using MinesServer.Data;
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+namespace MinesServer.Networking.Server.Packets.Connection;
+
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
+public readonly record struct CellConfigurationPacket(CellConfigProperties Properties, CellAnimationType Animation, byte AnimationSpeed, byte FrameOffset, int Color, byte ReliefGroup) : IServerPacket<CellConfigurationPacket>
+{
+    public readonly int Size => Unsafe.SizeOf<CellConfigurationPacket>();
+
+    public int Encode(Span<byte> output) => output.UnsafeWrite(this);
+
+    public static CellConfigurationPacket Decode(ReadOnlySpan<byte> input) => input.UnsafeRead<CellConfigurationPacket>();
+}

@@ -1,0 +1,17 @@
+{
+    "name": "MinesServer.Networking",
+    "rootNamespace": "MinesServer.Networking",
+    "references": [
+        "GUID:7770748e63f7dcc4daa73746bfffb149",
+        "GUID:1075eaaecc94fb34a98fb2c504a03e77"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

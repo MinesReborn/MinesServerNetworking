@@ -1,0 +1,46 @@
+﻿using MinesServer.Utils;
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace MinesServer.Networking.Server.Packets.GUI.Components.Input;
+
+public record class TextBoxPacket : InputComponentPacket<string>, IGUIComponentPacket<TextBoxPacket>
+{
+    public override byte PacketCode => GUIComponentPacketCodeProvider.Cache<TextBoxPacket>.Code;
+
+    public override string DefaultValue { get; init; } = "";
+
+#if NET7_0_OR_GREATER
+    [StringSyntax(StringSyntaxAttribute.Regex)]
+#endif
+    public string Regex { get; init; } = "";
+
+    public override int Size => base.Size
+        + sizeof(ushort) // DefaultValue.Length
+        + DefaultValue.Length * 2 // DefaultValue
+        + sizeof(byte) // Regex.Length
+        + Regex.Length * 2; // Regex
+
+    public override int Encode(Span<byte> output)
+    {
+        var writer = output.Writer();
+        writer.Advance(base.Encode(output));
+        writer.WriteU2PrefixedUtf16(DefaultValue);
+        writer.WriteU1PrefixedUtf16(Regex);
+        return writer.Position;
+    }
+
+    public static TextBoxPacket Decode(ReadOnlySpan<byte> input)
+    {
+        var reader = input.Reader();
+        return new(ref reader);
+    }
+
+    protected TextBoxPacket(ref MemoryReader reader) : base(ref reader)
+    {
+        DefaultValue = reader.ReadU2PrefixedUtf16(out _);
+        Regex = reader.ReadU1PrefixedUtf16(out _);
+    }
+
+    public TextBoxPacket() : base() { }
+}
