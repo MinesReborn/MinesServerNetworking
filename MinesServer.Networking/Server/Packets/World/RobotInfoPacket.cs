@@ -3,13 +3,14 @@ using System;
 
 namespace MinesServer.Networking.Server.Packets.World;
 
-public readonly record struct RobotInfoPacket(ushort BotId, int PlayerId, string Skin, string Tail, string Name) : IRootServerPacket<RobotInfoPacket>
+public readonly record struct RobotInfoPacket(ushort BotId, int PlayerId, byte ClanId, string Skin, string Tail, string Name) : IRootServerPacket<RobotInfoPacket>
 {
     public ushort PacketCode => RootServerPacketCodeProvider.Cache<RobotInfoPacket>.Code;
 
     public int Size =>
         sizeof(ushort) + // BotId
         sizeof(int) + // PlayerId
+        sizeof(byte) + // ClanId
         sizeof(byte) + // Skin.Length
         Skin.Length + // Skin
         sizeof(byte) + // Tail.Length
@@ -22,6 +23,7 @@ public readonly record struct RobotInfoPacket(ushort BotId, int PlayerId, string
         var writer = output.Writer();
         writer.Write(BotId);
         writer.Write(PlayerId);
+        writer.Write(ClanId);
         writer.WriteU1PrefixedASCII(Skin);
         writer.WriteU1PrefixedASCII(Tail);
         writer.WriteU1PrefixedUtf16(Name);
@@ -34,6 +36,7 @@ public readonly record struct RobotInfoPacket(ushort BotId, int PlayerId, string
         return new(
             reader.ReadU2(),
             reader.Read4(),
+            reader.ReadU1(),
             reader.ReadU1PrefixedASCII(out _),
             reader.ReadU1PrefixedASCII(out _),
             reader.ReadU1PrefixedUtf16(out _));
