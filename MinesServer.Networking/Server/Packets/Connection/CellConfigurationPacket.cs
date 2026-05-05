@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace MinesServer.Networking.Server.Packets.Connection;
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
-public readonly record struct CellConfigurationPacket(CellConfigProperties Properties, CellAnimationType Animation, byte AnimationSpeed, byte FrameOffset, int Color, byte ReliefGroup) : IServerPacket<CellConfigurationPacket>
+public readonly record struct CellConfigurationPacket(CellConfigProperties Properties, CellDistortionType Distortion, CellAnimationType Animation, byte AnimationSpeed, byte FrameOffset, int Color, byte ReliefGroup) : IServerPacket<CellConfigurationPacket>
 {
     public readonly int Size => Unsafe.SizeOf<CellConfigurationPacket>();
 
