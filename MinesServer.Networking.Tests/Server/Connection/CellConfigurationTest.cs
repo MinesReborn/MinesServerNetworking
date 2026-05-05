@@ -7,6 +7,7 @@ internal class CellConfigurationTest : PacketTest<CellConfigurationPacket>
 {
     public override CellConfigurationPacket Packet => new(
         CellConfigProperties.Passable | CellConfigProperties.Breakable,
+        CellDistortionType.Neutral,
         CellAnimationType.Shimmer,
         15,
         3,

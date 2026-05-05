@@ -11,8 +11,8 @@ internal class WorldInitTest : RootServerPacketTest<WorldInitPacket>
         10,
         10,
         [
-            new(CellConfigProperties.Passable, CellAnimationType.None, 0, 0, 0, 0),
-            new(CellConfigProperties.Breakable, CellAnimationType.Blinking, 5, 1, -1, 1)
+            new(CellConfigProperties.Passable, CellDistortionType.Neutral, CellAnimationType.None, 0, 0, 0, 0),
+            new(CellConfigProperties.Breakable, CellDistortionType.Block, CellAnimationType.Blinking, 5, 1, -1, 1)
         ],
         [
             [1, 2, 3],

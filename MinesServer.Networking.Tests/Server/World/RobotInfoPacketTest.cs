@@ -7,6 +7,7 @@ internal class RobotInfoPacketTest : RootServerPacketTest<RobotInfoPacket>
     public override RobotInfoPacket Packet => new(
     101,
     3,
+    5,
     "fatty",
     "rainbow",
     "Darkar25");
