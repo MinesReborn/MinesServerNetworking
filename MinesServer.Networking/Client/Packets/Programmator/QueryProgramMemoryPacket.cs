@@ -31,4 +31,9 @@ public readonly record struct QueryProgramMemoryPacket(IReadOnlyList<string> Var
             variables.Add(reader.ReadU1PrefixedUtf16(out _));
         return new(variables, start, stop);
     }
+
+    public bool Equals(QueryProgramMemoryPacket other) =>
+        ArrayStart == other.ArrayStart &&
+        ArrayStop == other.ArrayStop &&
+        Variables.SequenceEqual(other.Variables);
 }

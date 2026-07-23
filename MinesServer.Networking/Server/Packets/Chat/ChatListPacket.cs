@@ -35,4 +35,6 @@ public readonly record struct ChatListPacket(IReadOnlyList<(string Tag, string N
         }
         return new(chats);
     }
+
+    public bool Equals(ChatListPacket other) => Chats.SequenceEqual(other.Chats);
 }

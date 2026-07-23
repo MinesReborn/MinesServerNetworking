@@ -28,5 +28,7 @@ namespace MinesServer.Networking.Client.Packets.Utilities
             }
             return new(assets);
         }
+
+        public bool Equals(RuntimeAssetRequestPacket other) => Assets.SequenceEqual(other.Assets);
     }
 }
