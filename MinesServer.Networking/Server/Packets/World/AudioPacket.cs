@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace MinesServer.Networking.Server.Packets.World;
 
-public readonly record struct SFXPacket(SFX EffectType, ushort TargetBotId, ushort X, ushort Y, IReadOnlyList<StringPairPacket> Parameters) : IHBPacket<SFXPacket>
+public readonly record struct AudioPacket(SFX EffectType, ushort TargetBotId, ushort X, ushort Y, IReadOnlyList<StringPairPacket> Parameters) : IHBPacket<AudioPacket>
 {
-    public byte PacketCode => HBPacketCodeProvider.Cache<SFXPacket>.Code;
+    public byte PacketCode => HBPacketCodeProvider.Cache<AudioPacket>.Code;
 
     public int Size =>
         sizeof(SFX) + // EffectType
@@ -32,7 +32,7 @@ public readonly record struct SFXPacket(SFX EffectType, ushort TargetBotId, usho
         return writer.Position;
     }
 
-    public static SFXPacket Decode(ReadOnlySpan<byte> input)
+    public static AudioPacket Decode(ReadOnlySpan<byte> input)
     {
         var reader = input.Reader();
         var effect = reader.Read<SFX>();
@@ -49,7 +49,7 @@ public readonly record struct SFXPacket(SFX EffectType, ushort TargetBotId, usho
         return new(effect, botid, x, y, parameters);
     }
 
-    public bool Equals(SFXPacket other) =>
+    public bool Equals(AudioPacket other) =>
         EffectType == other.EffectType &&
         TargetBotId == other.TargetBotId &&
         X == other.X &&
