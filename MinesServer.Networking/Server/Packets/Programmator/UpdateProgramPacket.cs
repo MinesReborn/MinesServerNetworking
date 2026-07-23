@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 namespace MinesServer.Networking.Server.Packets.Programmator;
 
-public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(ProgAction Operator, string Label, int Value)> Instructions) : IRootServerPacket<UpdateProgramPacket>
+public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(ProgAction Operator, string Label, string Value)> Instructions) : IRootServerPacket<UpdateProgramPacket>
 {
     public ushort PacketCode => RootServerPacketCodeProvider.Cache<UpdateProgramPacket>.Code;
 
     public int Size =>
         sizeof(int) + // ProgramId
-        Instructions.Sum(x => sizeof(ProgAction) + sizeof(int) + sizeof(byte) + x.Label.Length * 2); // Instructions
+        Instructions.Sum(x => sizeof(ProgAction) + sizeof(byte) + x.Value.Length * 2 + sizeof(byte) + x.Label.Length * 2); // Instructions
 
     public int Encode(Span<byte> output)
     {
@@ -22,7 +22,7 @@ public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(
         {
             writer.Write(instruction.Operator);
             writer.WriteU1PrefixedUtf16(instruction.Label);
-            writer.Write(instruction.Value);
+            writer.WriteU1PrefixedUtf16(instruction.Value);
         }
         return writer.Position;
     }
@@ -31,9 +31,9 @@ public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(
     {
         var reader = input.Reader();
         var progId = reader.Read4();
-        List<(ProgAction Operator, string Label, int Value)> instructions = new();
+        List<(ProgAction Operator, string Label, string Value)> instructions = new();
         while(reader.CanRead)
-            instructions.Add((reader.Read<ProgAction>(), reader.ReadU1PrefixedUtf16(out _), reader.Read4()));
+            instructions.Add((reader.Read<ProgAction>(), reader.ReadU1PrefixedUtf16(out _), reader.ReadU1PrefixedUtf16(out _)));
         return new(progId, instructions);
     }
 

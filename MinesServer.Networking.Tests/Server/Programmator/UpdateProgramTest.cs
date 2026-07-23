@@ -5,5 +5,5 @@ namespace MinesServer.Networking.Tests.Server.Programmator;
 
 internal class UpdateProgramTest : RootServerPacketTest<UpdateProgramPacket>
 {
-    public override UpdateProgramPacket Packet => new(123, [(ProgAction.BooleanAND, "", 0), (ProgAction.AddNumberToVar, "asd", 456)]);
+    public override UpdateProgramPacket Packet => new(123, [(ProgAction.BooleanAND, "", ""), (ProgAction.AddNumberToVar, "asd", "456")]);
 }

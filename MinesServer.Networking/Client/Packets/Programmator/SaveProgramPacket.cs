@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace MinesServer.Networking.Client.Packets.Programmator;
 
-public readonly record struct SaveProgramPacket(int ProgramId, bool SaveAndRun, IReadOnlyList<(ProgAction Operator, string Label, long Value)> Program) : IRootClientPacket<SaveProgramPacket>
+public readonly record struct SaveProgramPacket(int ProgramId, bool SaveAndRun, IReadOnlyList<(ProgAction Operator, string Label, string Value)> Program) : IRootClientPacket<SaveProgramPacket>
 {
     public byte PacketCode => RootClientPacketCodeProvider.Cache<SaveProgramPacket>.Code;
 
     public int Size =>
         sizeof(int) + // ProgramId
         sizeof(bool) + // SaveAndRun
-        Program.Sum(x => sizeof(ProgAction) + sizeof(byte) + x.Label.Length * 2 + sizeof(long)); // Program
+        Program.Sum(x => sizeof(ProgAction) + sizeof(byte) + x.Label.Length * 2 + sizeof(byte) + x.Value.Length * 2); // Program
 
     public int Encode(Span<byte> output)
     {
@@ -24,7 +24,7 @@ public readonly record struct SaveProgramPacket(int ProgramId, bool SaveAndRun, 
         {
             writer.Write(op.Operator);
             writer.WriteU1PrefixedUtf16(op.Label);
-            writer.Write(op.Value);
+            writer.WriteU1PrefixedUtf16(op.Value);
         }
         return writer.Position;
     }
@@ -34,9 +34,9 @@ public readonly record struct SaveProgramPacket(int ProgramId, bool SaveAndRun, 
         var reader = input.Reader();
         var id = reader.Read4();
         var sar = reader.Read<bool>();
-        var prog = new List<(ProgAction, string, long)>();
+        var prog = new List<(ProgAction, string, string)>();
         while (reader.CanRead)
-            prog.Add((reader.Read<ProgAction>(), reader.ReadU1PrefixedUtf16(out _), reader.Read8()));
+            prog.Add((reader.Read<ProgAction>(), reader.ReadU1PrefixedUtf16(out _), reader.ReadU1PrefixedUtf16(out _)));
         return new(id, sar, prog);
     }
 
