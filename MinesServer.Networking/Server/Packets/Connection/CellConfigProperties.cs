@@ -10,5 +10,6 @@ public enum CellConfigProperties : byte
     Breakable = 1 << 1,
     DropsShadow = 1 << 2,
     ReceivesShadow = 1 << 3,
-    Blending = 1 << 4
+    Blending = 1 << 4,
+    Glowing = 1 << 5
 }
