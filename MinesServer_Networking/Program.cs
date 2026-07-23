@@ -1,6 +1,5 @@
 ﻿using MinesServer.Networking.Client.Packets;
 using MinesServer.Networking.Client.Packets.Chat;
-using System.Runtime.CompilerServices;
 
 namespace MinesServer_Networking
 {

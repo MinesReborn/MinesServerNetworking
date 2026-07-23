@@ -3,7 +3,6 @@ using MinesServer.Networking.Client.Packets.Chat;
 using MinesServer.Networking.Client.Packets.Connection;
 using MinesServer.Networking.Client.Packets.GUI;
 using MinesServer.Networking.Client.Packets.Inventory;
-using MinesServer.Networking.Client.Packets.Movement;
 using MinesServer.Networking.Client.Packets.Programmator;
 using MinesServer.Networking.Client.Packets.Utilities;
 

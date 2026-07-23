@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MinesServer.Networking;
+﻿namespace MinesServer.Networking;
 
 public interface INetworkPacketBase
 {

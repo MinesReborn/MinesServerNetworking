@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MinesServer.Utils
+﻿namespace MinesServer.Utils
 {
     public static class SpanExtensions
     {

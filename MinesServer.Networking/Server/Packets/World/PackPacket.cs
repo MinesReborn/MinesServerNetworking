@@ -1,5 +1,4 @@
 ﻿using MinesServer.Data;
-using System;
 using System.Runtime.CompilerServices;
 
 namespace MinesServer.Networking.Server.Packets.World;

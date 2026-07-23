@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MinesServer.Networking.Server.Packets.GUI.Components;
+﻿namespace MinesServer.Networking.Server.Packets.GUI.Components;
 
 public interface IContainerComponentPacket : IGUIComponentPacket
 {

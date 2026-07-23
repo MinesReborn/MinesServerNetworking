@@ -1,5 +1,4 @@
 ﻿using MinesServer.Utils;
-using System;
 using System.Drawing;
 
 namespace MinesServer.Networking.Server.Packets.Chat;

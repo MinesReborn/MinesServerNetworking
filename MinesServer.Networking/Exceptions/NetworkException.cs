@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MinesServer.Networking.Exceptions;
+﻿namespace MinesServer.Networking.Exceptions;
 
 public class NetworkException : Exception
 {

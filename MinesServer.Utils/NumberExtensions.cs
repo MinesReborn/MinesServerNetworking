@@ -1,8 +1,6 @@
-﻿using System;
-#if NET7_0_OR_GREATER
+﻿#if NET7_0_OR_GREATER
 using System.Numerics;
 #endif
-using System.Runtime.CompilerServices;
 
 namespace MinesServer.Utils
 {

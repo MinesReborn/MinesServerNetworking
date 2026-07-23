@@ -1,6 +1,5 @@
 ﻿using MinesServer.Data;
 using MinesServer.Utils;
-using System;
 
 namespace MinesServer.Networking.Server.Packets.Information;
 

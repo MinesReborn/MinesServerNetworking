@@ -1,5 +1,4 @@
 ﻿using MinesServer.Networking.Shared;
-using System;
 
 namespace MinesServer.Networking.Connection;
 

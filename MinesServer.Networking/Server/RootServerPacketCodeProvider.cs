@@ -61,6 +61,7 @@ public class RootServerPacketCodeProvider : NetworkPacketCodeProvider<IRootServe
         Register<UpdateProgramPacket>();
         Register<ProgramMemoryPacket>();
         Register<ProgramStatePacket>();
+        Register<OpenProgrammatorPacket>();
         Register<AuthTokenPacket>();
         Register<ChatMutePacket>();
         Register<ChatMessageListPacket>();

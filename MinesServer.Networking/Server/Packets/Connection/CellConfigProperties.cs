@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MinesServer.Networking.Server.Packets.Connection;
+﻿namespace MinesServer.Networking.Server.Packets.Connection;
 
 [Flags]
 public enum CellConfigProperties : byte

@@ -1,6 +1,5 @@
 ﻿using MinesServer.Networking.Exceptions;
 using MinesServer.Utils;
-using System;
 
 namespace MinesServer.Networking.Client.Packets.Actions;
 

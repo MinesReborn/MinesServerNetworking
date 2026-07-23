@@ -3,9 +3,7 @@ using MinesServer.Networking.Server.Packets;
 using MinesServer.Networking.Shared;
 using NetCoreServer;
 using System;
-using System.Data;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace MinesServer.Networking.Connection.Client;
 
