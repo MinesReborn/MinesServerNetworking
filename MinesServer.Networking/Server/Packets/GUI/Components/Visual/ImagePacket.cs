@@ -1,4 +1,5 @@
 ﻿using MinesServer.Utils;
+using System;
 
 namespace MinesServer.Networking.Server.Packets.GUI.Components.Visual;
 public record class ImagePacket : GUIComponentPacket, IGUIComponentPacket<ImagePacket>

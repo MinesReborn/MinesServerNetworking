@@ -1,4 +1,6 @@
-﻿namespace MinesServer.Networking;
+﻿using System;
+
+namespace MinesServer.Networking;
 
 public interface INetworkPacket<TSelf> : INetworkPacketBase where TSelf : INetworkPacket<TSelf>
 {

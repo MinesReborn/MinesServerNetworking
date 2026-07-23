@@ -1,6 +1,7 @@
 ﻿using K4os.Compression.LZ4;
 using MinesServer.Networking.Exceptions;
 using MinesServer.Utils;
+using System;
 
 namespace MinesServer.Networking.Server.Packets.Compression;
 

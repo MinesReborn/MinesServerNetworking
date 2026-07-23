@@ -1,4 +1,5 @@
 ﻿using MinesServer.Networking.Exceptions;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace MinesServer.Networking.Connection;

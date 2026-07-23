@@ -1,6 +1,6 @@
 {
   "name": "darkar25.fodinae.data",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Fodinae Data Types",
   "description": "Shared networking protocol for Client and Server",
   "unity": "6000.2",

@@ -2,6 +2,8 @@
 using System.Numerics;
 #endif
 
+using System;
+
 namespace MinesServer.Utils
 {
     public static class NumberExtensions

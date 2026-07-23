@@ -1,7 +1,9 @@
 ﻿using MinesServer.Networking.Exceptions;
 using MinesServer.Utils;
 using SharpCompress.Compressors.LZMA;
+using System;
 using System.Buffers;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace MinesServer.Networking.Server.Packets.Compression;

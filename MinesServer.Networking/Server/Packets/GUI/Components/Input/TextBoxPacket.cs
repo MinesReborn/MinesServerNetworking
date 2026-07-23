@@ -1,4 +1,5 @@
 ﻿using MinesServer.Utils;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MinesServer.Networking.Server.Packets.GUI.Components.Input;
