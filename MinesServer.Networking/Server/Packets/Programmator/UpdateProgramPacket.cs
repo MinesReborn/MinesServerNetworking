@@ -6,18 +6,20 @@ using System.Collections.Generic;
 
 namespace MinesServer.Networking.Server.Packets.Programmator;
 
-public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(ProgAction Operator, string Label, string Value)> Instructions) : IRootServerPacket<UpdateProgramPacket>
+public readonly record struct UpdateProgramPacket(int ProgramId, string DisplayName, IReadOnlyList<(ProgAction Operator, string Label, string Value)> Instructions) : IRootServerPacket<UpdateProgramPacket>
 {
     public ushort PacketCode => RootServerPacketCodeProvider.Cache<UpdateProgramPacket>.Code;
 
     public int Size =>
         sizeof(int) + // ProgramId
+        sizeof(byte) + DisplayName.Length * 2 + // DisplayName
         Instructions.Sum(x => sizeof(ProgAction) + sizeof(byte) + x.Value.Length * 2 + sizeof(byte) + x.Label.Length * 2); // Instructions
 
     public int Encode(Span<byte> output)
     {
         var writer = output.Writer();
         writer.Write(ProgramId);
+        writer.WriteU1PrefixedUtf16(DisplayName);
         foreach(var instruction in Instructions)
         {
             writer.Write(instruction.Operator);
@@ -31,13 +33,15 @@ public readonly record struct UpdateProgramPacket(int ProgramId, IReadOnlyList<(
     {
         var reader = input.Reader();
         var progId = reader.Read4();
+        var progName = reader.ReadU1PrefixedUtf16(out _);
         List<(ProgAction Operator, string Label, string Value)> instructions = new();
         while(reader.CanRead)
             instructions.Add((reader.Read<ProgAction>(), reader.ReadU1PrefixedUtf16(out _), reader.ReadU1PrefixedUtf16(out _)));
-        return new(progId, instructions);
+        return new(progId, progName, instructions);
     }
 
     public bool Equals(UpdateProgramPacket other) =>
         ProgramId == other.ProgramId &&
+        DisplayName == other.DisplayName &&
         Instructions.SequenceEqual(other.Instructions);
 }
