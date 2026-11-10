@@ -91,8 +91,4 @@ public enum CellType : byte
     GoldenRock = 120,
     DeepRock = 121,
     GRock = 122,
-
-    // Клиентский резерв: кромка мира рисуется только на клиенте,
-    // сервером не передаётся.
-    WorldEdge = 255
 }
