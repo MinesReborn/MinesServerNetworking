@@ -45,6 +45,7 @@ public sealed class RootClientPacketCodeProvider : NetworkPacketCodeProvider<IRo
         // последовательно, вставка в середину сдвигает коды всех последующих пакетов.
         Register<OpenChatListPacket>();
         Register<ChatMessageClickPacket>();
+        Register<ClientReadyPacket>();
         Register<AuthLoginPacket>();
         Register<AuthRegisterPacket>();
     }
