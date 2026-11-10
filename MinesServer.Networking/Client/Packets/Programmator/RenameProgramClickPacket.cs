@@ -8,7 +8,7 @@ namespace MinesServer.Networking.Client.Packets.Programmator;
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public readonly record struct RenameProgramClickPacket(int ProgramId) : IRootClientPacket<RenameProgramClickPacket>
 {
-    public byte PacketCode => RootClientPacketCodeProvider.Cache<RenameProgramClickPacket>.Code;
+    public byte PacketCode => RootClientPacketCodeProvider.GetPacketCode<RenameProgramClickPacket>();
 
     public int Size => Unsafe.SizeOf<RenameProgramClickPacket>();
 

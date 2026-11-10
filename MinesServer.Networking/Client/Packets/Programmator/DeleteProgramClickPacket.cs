@@ -8,7 +8,7 @@ namespace MinesServer.Networking.Client.Packets.Programmator;
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public readonly record struct DeleteProgramClickPacket(int ProgramId) : IRootClientPacket<DeleteProgramClickPacket>
 {
-    public byte PacketCode => RootClientPacketCodeProvider.Cache<DeleteProgramClickPacket>.Code;
+    public byte PacketCode => RootClientPacketCodeProvider.GetPacketCode<DeleteProgramClickPacket>();
 
     public int Size => Unsafe.SizeOf<DeleteProgramClickPacket>();
 

@@ -3,27 +3,31 @@ using MinesServer.Networking.Server.Packets.Connection;
 
 namespace MinesServer.Networking.Tests.Server.Connection;
 
-internal class CellConfigurationTest : PacketTest<CellConfigurationPacket>
+internal sealed class CellConfigurationTest : PacketTest<CellConfigurationPacket>
 {
     public override CellConfigurationPacket Packet => new(
-        Passable: true,
+        Properties: CellConfigProperties.Passable | CellConfigProperties.Glowing,
         DrawLayer: CellRenderLayer.Foreground,
         Outline: CellOutlineKind.Wavy,
-        TextureName: "Cells/Rock.png",
-        DecalTextureName: "terrain-decals-rock.png",
         ReliefGroup: 2,
         AnimationType: CellAnimationType.Prismatic,
         AnimationPalette: 2,
         FrameAnimationSpeed: 6f,
-        MapColor: unchecked((int)0xFF112233));
+        MapColor: unchecked((int)0xFF112233),
+        TextureAnchor: CellTextureAnchorKind.World);
 
     [Test]
     public void WireLayoutMatchesProtocolContract()
     {
         var packet = Packet;
-        Assert.That(packet.Size, Is.EqualTo(16 + "Cells/Rock.png".Length + "terrain-decals-rock.png".Length));
-        var bytes = new byte[packet.Size];
-        Assert.That(packet.Encode(bytes), Is.EqualTo(packet.Size));
-        Assert.That(CellConfigurationPacket.Decode(bytes), Is.EqualTo(packet));
+        Assert.Multiple(() =>
+        {
+            // Только значения без строк: Properties, DrawLayer, Outline, ReliefGroup,
+            // AnimationType, AnimationPalette (6 байт) + float + int + TextureAnchor.
+            Assert.That(packet.Size, Is.EqualTo(15));
+            var bytes = new byte[packet.Size];
+            Assert.That(packet.Encode(bytes), Is.EqualTo(packet.Size));
+            Assert.That(CellConfigurationPacket.Decode(bytes), Is.EqualTo(packet));
+        });
     }
 }
