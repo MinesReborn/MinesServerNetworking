@@ -4,6 +4,12 @@ using System;
 
 namespace MinesServer.Networking.Server.Packets.GUI.Components.Visual;
 
+/// <summary>
+/// Текст элемента окна. Стиль текста (гарнитура, кегль, цвет, жирность,
+/// подчёркивание, разрядка, выравнивание) сервер задаёт rich-text тегами
+/// прямо в строке: текст парсится общим TextCore-парсером клиента.
+/// Строку обрезать только с защитой границ тегов.
+/// </summary>
 public record class TextPacket : GUIComponentPacket, IGUIComponentPacket<TextPacket>
 {
     public override byte PacketCode => GUIComponentPacketCodeProvider.GetPacketCode<TextPacket>();
