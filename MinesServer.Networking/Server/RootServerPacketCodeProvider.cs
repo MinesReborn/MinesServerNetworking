@@ -49,6 +49,7 @@ public sealed class RootServerPacketCodeProvider : NetworkPacketCodeProvider<IRo
         Register<ClearStatusLinePacket>();
         Register<ClearStatusPacket>();
         Register<SkillProgressPacket>();
+        Register<ReservedRootPacket30>();
         Register<MissionInitPacket>();
         Register<LocalChatMessagePacket>();
         Register<ModalWindowPacket>();
@@ -85,4 +86,23 @@ internal readonly record struct ReservedRootPacket21(byte Payload) : IRootServer
     }
 
     public static ReservedRootPacket21 Decode(ReadOnlySpan<byte> input) => new(input[0]);
+}
+
+/// <summary>
+/// Слот 30 — бывший <c>DailyBonusStatePacket</c> (1 байт). Заглушка сохраняет
+/// нумерацию кодов 30+ для совместимости с пирами на старой версии протокола.
+/// </summary>
+internal readonly record struct ReservedRootPacket30(byte Payload) : IRootServerPacket<ReservedRootPacket30>
+{
+    public ushort PacketCode => RootServerPacketCodeProvider.GetPacketCode<ReservedRootPacket30>();
+
+    public int Size => sizeof(byte);
+
+    public int Encode(Span<byte> output)
+    {
+        output[0] = Payload;
+        return sizeof(byte);
+    }
+
+    public static ReservedRootPacket30 Decode(ReadOnlySpan<byte> input) => new(input[0]);
 }
